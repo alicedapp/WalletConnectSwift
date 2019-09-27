@@ -391,7 +391,7 @@ extension JSONEncoder {
 
     static func encoder() -> JSONEncoder {
         let encoder = JSONEncoder()
-        encoder.outputFormatting = [.sortedKeys]
+        encoder.outputFormatting = [.prettyPrinted]
         return encoder
     }
 
