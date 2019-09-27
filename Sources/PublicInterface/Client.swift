@@ -10,6 +10,7 @@ public protocol ClientDelegate: class {
     func client(_ client: Client, didConnect session: Session)
     func client(_ client: Client, didDisconnect session: Session)
 
+    func client(_ client: Client, didReciveAliceSocket request: Request)
 }
 
 public class Client: WalletConnect {
@@ -242,6 +243,8 @@ public class Client: WalletConnect {
             } catch { // session already disconnected
                 delegate.client(self, didDisconnect: session)
             }
+        } else if request.method == "alice_socket"{
+            delegate.client(self, didReciveAliceSocket: request)
         } else {
             // TODO: error handling
             let response = try! Response(request: request, error: .methodNotFound)
